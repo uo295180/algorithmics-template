@@ -1,0 +1,29 @@
+package prime;
+
+
+
+import java.util.List;
+
+import prime.prog.Prime;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		int n = 10000;
+		long time;
+		long finnish;
+		
+		for(int i = 1; i <= 10; i++) {
+			time = System.currentTimeMillis();
+			
+			List<Integer> primes = Prime.primeList(n);
+			
+			finnish = System.currentTimeMillis();
+			
+			System.out.println("n = " + n + " *** " + "time = " + (int) (finnish-time) + " milliseconds");
+			
+			n *= 2; 
+		}
+		
+	}
+}

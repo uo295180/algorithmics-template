@@ -14,4 +14,5 @@ if __name__ == '__main__':
     t1 = time()  #gives the time in seconds and with decimals (real)
     primoA1(n)
     t2 = time()
-    print("n =", n, "***", "time =", int(1000*(t2-t1)), "milliseconds)")
+    print("n =", n, "***", "time =", int(1000*(t2-t1)), "milliseconds")
+

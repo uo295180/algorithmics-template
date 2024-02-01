@@ -14,5 +14,5 @@ if __name__ == '__main__':
     t1 = time()  
     primes = listadoPrimos(n)
     t2 = time()
-    print("n =", n, "***", "time =", int(1000*(t2-t1)), "milliseconds)")
+    print("n =", n, "***", "time =", int(1000*(t2-t1)), "milliseconds")
     print(primes)
