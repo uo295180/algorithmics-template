@@ -13,7 +13,7 @@ public class Vector4 {
 		long t1,t2;
 		int sum = 0;
 		
-		for (int n=10; n<=Integer.MAX_VALUE; n*=5){ //n is increased *5   
+		for (int n=10000; n<=Integer.MAX_VALUE; n*=2){ //n is increased *5   
 			  v = new int[n];
 			  Vector1.fillIn(v);
 			  
