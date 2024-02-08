@@ -1,0 +1,37 @@
+**************************************************************************************
+
+
+Activity 1:
+Calculate how many more years we can continue using the way of counting:
+
+Knowing that:
+- System.currentTimeMillis() measures the time in a type long variable
+- It measures the time from the first of January of 1970
+- Long has 64 bits
+Using java, we can obtain the maximum date that the max value of long corresponds
+to with:
+
+long max = Long.MAX_VALUE;
+	  Date d = new Date(max);
+	  System.out.print(d);
+
+And we obtain:
+Sun Aug 17 08:12:55 CET 292278994
+
+Then, thats the maximum date, so from now we can just substract 2024
+Then we have 292275070 years left
+
+***************************************************************************************
+
+Activity 2:
+
+a) What does it mean that the time measured is 0?
+
+When the time measured is 0, it means that the execution time is so low that 
+we cant have any relevant measures of the algorithm. Then, we'll need to increase n in 
+order to get some relevant information 
+
+b) From what size of problem (n) do we start to get reliable times?
+
+To get a reliable time, we need to obtain a time bigger than 50 ms. For example,
+for the n = 10000000, the algorithm wastes 83ms
