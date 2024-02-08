@@ -18,3 +18,13 @@ Template for algorithmics lab sessions
 |20480000|||||
 |40960000|||||
 |81920000|||||
+
+
+|nTimes|Time units|
+|---|----|
+|1|Milliseconds ($10^{-3}$ sg)|
+|10|Tens of millisec ($10^{-4}$ sg)|
+|100|Hundreds of millisec ($10^{-5}$ sg)|
+|1000|Microseconds ($10^{-6}$ sg)|
+|10000|Tends of micros ($10^{-6}$ sg)|
+|10000|Hundreds of micros ($10^{-7}$ sg)|
