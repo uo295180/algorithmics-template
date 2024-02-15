@@ -82,3 +82,175 @@ The data of this new classes measures are in the table below. Those measures for
 |1000|Microseconds ($10^{-6}$ sg)|
 |10000|Tends of micros ($10^{-6}$ sg)|
 |10000|Hundreds of micros ($10^{-7}$ sg)|
+
+
+## Session 1.2
+
+Classes **Loop1.java, Loop2.java, Loop3.java and Loop4.java** are provided. Iterative models to determine their time complexity.
+
+### 2. Some iterative models  
+
+- **Loop1.java**
+```Java
+long cont = 0;
+long n1 = 1;
+
+while (n1 <= n * n) { // log3(n^2)
+	for (long i = 1; i <= 2 * n; i += 3) // 2n/3
+		cont++;
+	n1 = 3 * n1;
+}
+
+// total complexity -> log3(n^2)*2n/3 -> O(nlog(n))
+
+return cont;
+```
+
+- **Loop2.java**
+```Java
+long cont = 0;
+long n1 = n;
+
+do {
+	for (long i = 1; i <= n; i++) // n
+		for (long j = n; j >= 0; j -= 2) // n/2
+			cont++;
+	n1 = n1 / 3;
+} while (n1 >= 1); // log3(n)
+
+// total complexity -> log3(n)*n*n/2 -> O(n^2log(n))
+
+return cont;
+```
+
+- **Loop3.java**
+```Java
+long cont = 0;
+long i = 1;
+
+while (i <= 2 * n) { // 2n
+	for (long j = i; j >= 0; j -= 2) // 2n/2
+		for (long k = 1; k <= n; k *= 2) // log2(n)
+			cont++;
+	i++;
+}
+// total complexity -> 2n*2n/2*log2(n) -> O(n^2log(n))
+
+return cont;
+```
+
+- **Loop4.java**
+```Java
+long cont = 0;
+
+for (int i = 1; i <= n; i++) // n
+	for (int j = 1; j <= i; j++) // n
+		for (int k = 1; k <= j; k++) // n
+			cont++;
+
+// total complexity -> n*n*n -> O(n^3)
+
+return cont;
+```
+
+
+After the execution of the different algorithms, we can measure their times and observe that, in order, from loop 1 to loop 4 the time increases
+|N|tLoop1|tLoop2|tLoop3|tLoop4|
+|--|--|---|---|---|
+|**100**|0.0099|0.367|1.27|1.24|
+|**200**|0.0207|1.37|5.44|9.73|
+|**400**|0.0452|6.39|26.85|78.51|
+|**800**|0.123|28.3|113|638|
+|**1600**|0.359|115|503|5244|
+|**3200**|0.478|521|2168|37901|
+|**6400**|1.02|2059|9142|Oot|
+|**12800**|2.37|9216|36909|Oot|
+|**25600**|4.83|41427|Oot|Oot|
+|**51200**|10.13|Oot|Oot|Oot|
+
+Knowing that: 
+- **loop1** has O($n\log(n)$) complexity
+- **loop2** has O($n^{2}\log(n)$) complexity
+- **loop3** has O($n^{2}\log(n)$) complexity
+- **loop4** has O($n^{3}$) complexity
+
+We can observe that the increase of these algorithm thoretical complexities directly reflects into our time measurements
+
+
+### 3. Creation of iterative models of a given time complexity
+
+We're asked to create new **Loop5.java, Loop6.java and Loop7.java** clasess implementing new loops that satisfies the following thoretical time complexities:
+- **loop5** has O($n^{2}\log^{2}(n)$) complexity
+- **loop6** has O($n^{3}\log(n)$) complexity
+- **loop7** has O($n^{4}$) complexity
+
+The following implementations are my approach for the problem:
+
+- **Loop5.java**
+```Java
+long cont = 0;
+long n1 = n;
+
+do {
+	for (long i = 1; i <= n; i++) // n
+		for (long j = n; j >= 0; j -= 2) // n/2
+			for(long k = 1; k <= n; k *= 2) // log2(n)
+				cont++;
+	n1 = n1 / 2;
+} while (n1 >= 1); // log2(n)
+
+// total complexity -> log2(n)*log2(n)*n*n/2 -> O(n^2log^2(n))
+
+return cont;
+```
+
+- **Loop6.java**
+```Java
+long cont = 0;
+long n1 = n;
+
+do {
+	for (long i = 1; i <= n; i++) // n
+		for (long j = n; j >= 0; j -= 2) // n/2
+			for(long k = 0; k <= n; k++) // n
+				cont++;
+	n1 = n1 / 2;
+} while (n1 >= 1); // log2(n)
+
+// total complexity -> log2(n)*n*n*n/2 -> O(n^3log(n))
+
+return cont;
+```
+
+- **Loop7.java**
+```Java
+long cont = 0;
+
+for (int i = 1; i <= n; i++) // n
+	for (int j = 1; j <= i; j++) // n
+		for (int k = 1; k <= j; k++) // n
+			for (int m = 1; m <= k; m++) // n
+				cont++;
+
+// total complexity -> n*n*n*n -> O(n^4)
+
+return cont;
+```
+
+
+Then, the table of times that we obtain from the execution of this algorithims without optimizations is:
+
+|N|tLoop5|tLoop6|tLoop7|
+|--|--|---|---|
+|**100**|5.6|51.1|40.2|
+|**200**|30|482|552|
+|**400**|109|3897|8323|
+|**800**|513|34985|Oot|
+|**1600**|3069|Oot|Oot|
+|**3200**|12940|Oot|Oot|
+|**6400**|57776|Oot|Oot|
+
+In this case, as we increase the theoretical complexities of our algorithms, the time increases again as O($n^{2}\log^{2}(n)$) < O($n^{3}\log(n)$) < O($n^{4}$)
+
+### 4. Comparison of two algorithms
+
