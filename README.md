@@ -262,6 +262,6 @@ If the complexities are different, the ratio can either:
 
 If the size of the problem grows and the algorithms has the same complexity, it will tend to a constant that will be:
 - < 1 if the algorithm in the numerator is better
-- > 1 if the algorithm in the denominator is better
+- \> 1 if the algorithm in the denominator is better
 - = 1 if the algorithms are exactly equal
 
