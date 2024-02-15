@@ -238,7 +238,7 @@ return cont;
 ```
 
 
-Then, the table of times that we obtain from the execution of this algorithims without optimizations is:
+Then, the table of times (in milliseconds without Optimization) that we obtain from the execution of this algorithims without optimizations is:
 
 |N|tLoop5|tLoop6|tLoop7|
 |--|--|---|---|
@@ -252,5 +252,16 @@ Then, the table of times that we obtain from the execution of this algorithims w
 
 In this case, as we increase the theoretical complexities of our algorithms, the time increases again as O($n^{2}\log^{2}(n)$) < O($n^{3}\log(n)$) < O($n^{4}$)
 
+
 ### 4. Comparison of two algorithms
+
+To compare two algorithms we can calculate the **division ratio** of the execution time for the same size of the problem.
+If the complexities are different, the ratio can either:
+- Tend to 0 if the numerator has the best complexity
+- Tend to $\infty$  if the numerator has the worst complexity   
+
+If the size of the problem grows and the algorithms has the same complexity, it will tend to a constant that will be:
+- < 1 if the algorithm in the numerator is better
+- > 1 if the algorithm in the denominator is better
+- = 1 if the algorithms are exactly equal
 
