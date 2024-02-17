@@ -19,7 +19,8 @@ def main():
     cont=0
     for i in range (10):
         t1=time()
-        c=loop4(n)
+        for j in range(1):
+            c=loop4(n)
         t2=time()
         print("n= ",n,"**time=",int(1000*(t2-t1)),"**counter=",c)
         n=n*2
