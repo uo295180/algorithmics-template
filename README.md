@@ -277,7 +277,8 @@ If the size of the problem grows and the algorithms has the same complexity, it 
 | **6400** | 1.02 | 2059 | 0.0005 |
 | **12800** | 2.37 | 9216 | 0.00026 |
 | **25600** | 4.83 | 41427 | 0.00012 |
-| **51200** | 10.13 | <font color="red">Oot</font> | ---------<br> |
+| **51200** | 10.13 | <font color="red">Oot</font> | --------- |
+
 As it can be seen, the division ratio tends to zero. According to the previous rules, when the division ratio tends to zero, we can conclude that the theoretical time complexity of the algorithm in the numerator (tLoop1 O($n\log(n)$)) is better than the theoretical time complexity of the algorithm in the denominator (tLoop2 O($n^{2}\log(n)$))
 ### Activity 4
 
@@ -293,6 +294,7 @@ As it can be seen, the division ratio tends to zero. According to the previous r
 | **12800** | 36909 | 9216 | 4.00488 |
 | **25600** | <font color="red">Oot</font> | 41427 | ---------<br> |
 | **51200** | <font color="red">Oot</font> | <font color="red">Oot</font> | ---------<br> |
+
 As it can be seen, the division rate tends (approx) to the constant 4, that is greater than zero. When the division rate tends to a constant, according to the previous rules, we can conclude that both algorithms have the same theoretical time complexity. Knowing that the constant is greater than 1, we can conclude that the algorithm in the numerator (tLoop3 O($n^{2}\log(n)$)) is worst than the algorithm in the denominator (tLoop2 O($n^{2}\log(n)$))
 
 ### Activity 5
