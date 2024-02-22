@@ -74,14 +74,14 @@ It can be seen that, althoug the complexity is the same as in the Bubble algorit
 
 |n|t random|
 |--|--|
-|Quicksort||
-|Quicksort + Insertion (k=5)||
-|Quicksort + Insertion (k=10)||
-|Quicksort + Insertion (k=20)||
-|Quicksort + Insertion (k=30)||
-|Quicksort + Insertion (k=40)||
-|Quicksort + Insertion (k=50)||
-|Quicksort + Insertion (k=100)||
-|Quicksort + Insertion (k=200)||
-|Quicksort + Insertion (k=500)||
-|Quicksort + Insertion (k=1000)||
+|Quicksort|18373|
+|Quicksort + Insertion (k=5)|17680|
+|Quicksort + Insertion (k=10)|16984|
+|Quicksort + Insertion (k=20)|17500|
+|Quicksort + Insertion (k=30)|19497|
+|Quicksort + Insertion (k=40)|19235|
+|Quicksort + Insertion (k=50)|22222|
+|Quicksort + Insertion (k=100)|18297|
+|Quicksort + Insertion (k=200)|12947|
+|Quicksort + Insertion (k=500)|22225|
+|Quicksort + Insertion (k=1000)|39794|
