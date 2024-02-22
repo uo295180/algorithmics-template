@@ -85,3 +85,6 @@ It can be seen that, althoug the complexity is the same as in the Bubble algorit
 |Quicksort + Insertion (k=200)|12947|
 |Quicksort + Insertion (k=500)|22225|
 |Quicksort + Insertion (k=1000)|39794|
+
+
+Wrong. REDO
