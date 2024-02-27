@@ -16,7 +16,7 @@ def listadoPrimos(n):
     return primes
 
 if __name__ == '__main__':
-    n = 10
+    n = 10000
     for casos in range(7):
         t1 = time()
         primes = listadoPrimos(n)
