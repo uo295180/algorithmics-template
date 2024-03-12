@@ -1,16 +1,17 @@
 package algstudent.s2;
 
-public class QuicksortTimes {
+/* This class measures times for the Bubble method
+for the 3 assumptions: (already ordered, reverse ordered and random ordered) */
+public class BubbleTimes {
 	static int[] v;
 
 	public static void main(String arg[]) {
 		long t1, t2;
 		String opcion = arg[0];
 
-		for (int n = 0; n <= 6; n++) {
-			int size =(int) (250000*Math.pow(2, n)); 
-			v = new int[size];
-			
+		for (int n = 10000; n <= 1000000000; n *= 2) {
+			v = new int[n];
+
 			if (opcion.compareTo("ordered") == 0)
 				Vector.sorted(v);
 			else if (opcion.compareTo("reverse") == 0)
@@ -20,11 +21,11 @@ public class QuicksortTimes {
 
 			t1 = System.currentTimeMillis();
 
-			Quicksort.quicksort(v);
+			Bubble.bubble(v);
 
 			t2 = System.currentTimeMillis();
 
-			System.out.println(size + "\t" + (t2 - t1));
+			System.out.println(n + "\t" + (t2 - t1));
 		}
 	}
 }
