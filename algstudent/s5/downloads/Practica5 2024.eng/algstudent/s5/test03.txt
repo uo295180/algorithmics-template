@@ -1,0 +1,5 @@
+casa
+casa true
+cosa false
+ca?a true
+**a true
