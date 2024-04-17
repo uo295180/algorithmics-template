@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class NumericSquareOne {
 	
 	int size;
+	boolean solveAgain = false;
 	String[][] data;
 	Number[][] variableData;
 	String[][] rowOperators;
@@ -20,7 +21,7 @@ public class NumericSquareOne {
 		fillUpRowOperators();
 		fillUpColOperators();
 		
-		solve();
+		//solve();
 	}
 
 	public void fillUpNumberMatrix() {
@@ -31,7 +32,7 @@ public class NumericSquareOne {
 			colCounter = 0;
 			for(int j = 0; j < data[i].length-2; j+=2) {
 				if(data[i][j].equals("?")) variableData[rowCounter][colCounter] = new Number();
-				else variableData[rowCounter][colCounter] = new Number(Integer.valueOf(data[i][j]),false);
+				else variableData[rowCounter][colCounter] = new Number(Integer.valueOf(data[i][j]),true);
 				colCounter++;
 			}
 			rowCounter++;
@@ -144,14 +145,26 @@ public class NumericSquareOne {
 	}
 	
 	
-	public void solve() {
+	public String[][] solve() {
 		solveRows();
 		if(!checkIsSolved()) {
+			solveAgain = true;
 			solveAll(0);
 		}
-		
+		return solutionFormat();
 	}
 	
+	private String[][] solutionFormat() {
+		String[][] solution = new String[size][size];
+		
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				solution[i][j] = String.valueOf(variableData[i][j].value);
+			}
+		}
+		return solution;
+	}
+
 	private boolean solveAll(int rowIndex) {
 		int[] initialRow = initialValues(variableData[rowIndex]);
 		if(rowIndex<size-1) {
@@ -162,13 +175,18 @@ public class NumericSquareOne {
 				if(checkIsSolved()) return true;
 				solveAll(rowIndex + 1);
 			}
-		}
-		solveRow(rowIndex,0);
-		while(!equalRows(initialRow, variableData[rowIndex])) {
+		}else {
 			solveRow(rowIndex,0);
 			if(checkIsSolved()) return true;
+	
+			while(!equalRows(initialRow, variableData[rowIndex])) {
+				solveAgain=true;
+				solveRow(rowIndex,0);
+				if(checkIsSolved()) return true;
+			}
+			
+			return false;
 		}
-		
 		return false;
 		}
 	
@@ -194,9 +212,10 @@ public class NumericSquareOne {
 	}
 	
 	private boolean checkIsSolved() {
-		boolean isSolved = false;
+		boolean isSolved = true;
 		for(int i = 0; i < size; i++) {
 			isSolved = isSolved && checkCol(i);
+			if(!isSolved) break;
 		}
 		return isSolved;
 		
@@ -210,10 +229,12 @@ public class NumericSquareOne {
 				if(!currentNumber.isInmutable()) {
 					currentNumber.increase();
 					if(checkRow(row)) return true;
-					solveRow(row, index+1);
+					if(solveRow(row, index+1)) return true;
 				}
 			}
 		}
+		if(!solveAgain&&checkRow(row)) return true;
+		else solveAgain=false;
 		for(int i = 0; i < 9; i++) {
 			if(!currentNumber.isInmutable()) {
 				currentNumber.increase();
@@ -252,7 +273,8 @@ public class NumericSquareOne {
 				return false;
 			}
 		}
-		return value==Integer.valueOf(data[data.length][index*2]);
+		boolean result = value==Integer.valueOf(data[data.length-1][index]);
+		return value==Integer.valueOf(data[data.length-1][index]);
 	}
 	
 
