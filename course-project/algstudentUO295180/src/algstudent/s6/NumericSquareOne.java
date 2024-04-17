@@ -149,7 +149,9 @@ public class NumericSquareOne {
 		solveRows();
 		if(!checkIsSolved()) {
 			solveAgain = true;
-			solveAll(0);
+			if(!solveAll(0)) {
+				System.out.println("Not working");
+			}
 		}
 		return solutionFormat();
 	}
@@ -165,31 +167,53 @@ public class NumericSquareOne {
 		return solution;
 	}
 
+//	private boolean solveAll(int rowIndex) {
+//		int[] initialRow = initialValues(variableData[rowIndex]);
+//		if(rowIndex<size-1) {
+//			if(solveAll(rowIndex + 1)) return true;
+//			solveRow(rowIndex,0);
+//			while(!equalRows(initialRow, variableData[rowIndex])) {
+//				solveRow(rowIndex,0);
+//				if(checkIsSolved()) return true;
+//				solveAll(rowIndex + 1);
+//			}
+//		}else {
+//			solveRow(rowIndex,0);
+//			if(checkIsSolved()) return true;
+//			if(!solveAgain&&checkRow(rowIndex)) return true;
+//			else solveAgain=false;
+//			while(!equalRows(initialRow, variableData[rowIndex])) {
+//				solveAgain=true;
+//				solveRow(rowIndex,0);
+//				if(checkIsSolved()) return true;
+//			}
+//			
+//			return false;
+//		}
+//		return false;
+//		}
+	
 	private boolean solveAll(int rowIndex) {
 		int[] initialRow = initialValues(variableData[rowIndex]);
+		if(rowIndex == 0)
 		if(rowIndex<size-1) {
 			if(solveAll(rowIndex + 1)) return true;
-			solveRow(rowIndex,0);
-			while(!equalRows(initialRow, variableData[rowIndex])) {
-				solveRow(rowIndex,0);
-				if(checkIsSolved()) return true;
-				solveAll(rowIndex + 1);
-			}
-		}else {
-			solveRow(rowIndex,0);
+		}
+		solveRow(rowIndex,0);
+		if(rowIndex<size-1) {
+			if(solveAll(rowIndex+1)) return true;
+		}
+		while(!equalRows(initialRow, variableData[rowIndex])) {
 			if(checkIsSolved()) return true;
-	
-			while(!equalRows(initialRow, variableData[rowIndex])) {
-				solveAgain=true;
-				solveRow(rowIndex,0);
-				if(checkIsSolved()) return true;
+			solveRow(rowIndex,0);
+			if(rowIndex<size-1) {
+				if(solveAll(rowIndex+1)) return true;
 			}
-			
-			return false;
 		}
 		return false;
-		}
-	
+	}
+		
+
 	private int[] initialValues(Number[] row) {
 		int[] initialValues = new int[row.length];
 		for(int i = 0; i < row.length; i++) {
@@ -232,14 +256,14 @@ public class NumericSquareOne {
 					if(solveRow(row, index+1)) return true;
 				}
 			}
+			if(index==0) currentNumber.increase();
+			return false;
 		}
-		if(!solveAgain&&checkRow(row)) return true;
-		else solveAgain=false;
+		
 		for(int i = 0; i < 9; i++) {
-			if(!currentNumber.isInmutable()) {
-				currentNumber.increase();
-				if(checkRow(row)) return true;
-			}
+			if(currentNumber.isInmutable()) break;
+			currentNumber.increase();
+			if(checkRow(row)) return true;
 		}
 		return false;
 	}
@@ -253,6 +277,7 @@ public class NumericSquareOne {
 			nextValue = variableData[index][i+1].value;
 			try{
 				value = performOperation(value, operator, nextValue);
+				if(value==Integer.MAX_VALUE)return false;
 			} catch(Exception e) {
 				return false;
 			}
@@ -269,12 +294,13 @@ public class NumericSquareOne {
 			nextValue = variableData[i+1][index].value;
 			try{
 				value = performOperation(value, operator, nextValue);
+				if(value==Integer.MAX_VALUE)return false;
 			} catch(Exception e) {
 				return false;
 			}
 		}
 		boolean result = value==Integer.valueOf(data[data.length-1][index]);
-		return value==Integer.valueOf(data[data.length-1][index]);
+		return result;
 	}
 	
 
@@ -287,6 +313,7 @@ public class NumericSquareOne {
 			case("*"):
 				return value * nextValue;
 			case("/"):
+				if(value%nextValue!=0) return Integer.MAX_VALUE;
 				return value / nextValue;
 		}
 		throw new IllegalArgumentException("Rare operator");
