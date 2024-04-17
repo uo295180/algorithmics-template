@@ -31,34 +31,38 @@ String[][] data;
 		data = BoardLoader.loadData("src/algstudent/s6/test03.txt");
 		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
 		numericSquareOne.printBoard();
+		numericSquareOne.printNumberBoard();
+		numericSquareOne.printRowOperators();
+		numericSquareOne.printColOperators();
 	}
 	
-	@Test
-	public void test5() {
-		data = BoardLoader.loadData("src/algstudent/s6/test04.txt");
-		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
-		numericSquareOne.printBoard();
-	}
-	
-	
-	@Test
-	public void test6() {
-		data = BoardLoader.loadData("src/algstudent/s6/test05.txt");
-		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
-		numericSquareOne.printBoard();
-	}
-	
-	@Test
-	public void test7() {
-		data = BoardLoader.loadData("src/algstudent/s6/test06.txt");
-		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
-		numericSquareOne.printBoard();
-	}
-	
-	@Test
-	public void test8() {
-		data = BoardLoader.loadData("src/algstudent/s6/test07.txt");
-		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
-		numericSquareOne.printBoard();
-	}
+//	@Test
+//	public void test5() {
+//		data = BoardLoader.loadData("src/algstudent/s6/test04.txt");
+//		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
+//		numericSquareOne.printBoard();
+//	}
+//	
+//	
+//	@Test
+//	public void test6() {
+//		data = BoardLoader.loadData("src/algstudent/s6/test05.txt");
+//		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
+//		numericSquareOne.printBoard();
+//	}
+//	
+//	@Test
+//	public void test7() {
+//		data = BoardLoader.loadData("src/algstudent/s6/test06.txt");
+//		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
+//		numericSquareOne.printBoard();
+//	}
+//	
+//	@Test
+//	public void test8() {
+//		data = BoardLoader.loadData("src/algstudent/s6/test07.txt");
+//		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
+//		numericSquareOne.printBoard();
+//		numericSquareOne.printNumberBoard();
+//	}
 }

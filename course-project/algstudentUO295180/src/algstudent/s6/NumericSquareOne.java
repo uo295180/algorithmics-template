@@ -1,9 +1,14 @@
 package algstudent.s6;
 
+import java.util.Arrays;
+
 public class NumericSquareOne {
 	
 	int size;
 	String[][] data;
+	Number[][] variableData;
+	String[][] rowOperators;
+	String[][] colOperators;
 	
 	
 	public NumericSquareOne(String[][]data) {
@@ -11,19 +16,55 @@ public class NumericSquareOne {
 		size = data.length-data.length/2-1;
 		reorderData();
 		
-		//solve();
+		fillUpNumberMatrix();
+		fillUpRowOperators();
+		fillUpColOperators();
+		
+		solve();
 	}
 
+	public void fillUpNumberMatrix() {
+		int rowCounter = 0;
+		int colCounter = 0;
+		variableData=new Number[size][size];
+		for(int i = 0; i < data.length - 2; i+=2) {
+			colCounter = 0;
+			for(int j = 0; j < data[i].length-2; j+=2) {
+				if(data[i][j].equals("?")) variableData[rowCounter][colCounter] = new Number();
+				else variableData[rowCounter][colCounter] = new Number(Integer.valueOf(data[i][j]),false);
+				colCounter++;
+			}
+			rowCounter++;
+		}
+	}
 	
+	public void fillUpRowOperators() {
+		int rowCounter = 0;
+		int colCounter = 0;
+		rowOperators=new String[size][size-1];
+		for(int i = 0; i < data.length - 2; i+=2) {
+			colCounter = 0;
+			for(int j = 1; j < data[i].length-3; j+=2) {
+				rowOperators[rowCounter][colCounter]=data[i][j];
+				colCounter++;
+			}
+			rowCounter++;
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void fillUpColOperators() {
+		int rowCounter = 0;
+		int colCounter = 0;
+		colOperators=new String[size-1][size];
+		for(int i = 1; i < data.length - 2; i+=2) {
+			colCounter = 0;
+			for(int j = 0; j < data[i].length-2; j+=2) {
+				colOperators[rowCounter][colCounter]=data[i][j];
+				colCounter++;
+			}
+			rowCounter++;
+		}
+	}
 	
 	private void reorderData() {
 		for(int i = 1; i < data.length; i+=2) {
@@ -63,7 +104,169 @@ public class NumericSquareOne {
 		for(int j = 0; j < data[data.length-1].length; j++) {
 				System.out.print(data[data.length-1][j] + "   ");
 		}
-		System.out.println();
 		
+		for(int i = 0; i < data.length; i++) {
+			System.out.println();
+			for(int j = 0; j < data[i].length; j++) {
+				System.out.print(data[i][j]);
+			}
+		}
+		System.out.println();
+	}
+	
+	public void printNumberBoard() {
+		for(int i = 0; i < variableData.length; i++) {
+			System.out.println();
+			for(int j =0; j < variableData[i].length; j++) {
+				
+				System.out.print(variableData[i][j].value);
+			}
+		}
+	}
+	
+	public void printRowOperators() {
+		for(int i = 0; i < rowOperators.length; i++) {
+			System.out.println();
+			for(int j =0; j < rowOperators[i].length; j++) {
+				
+				System.out.print(rowOperators[i][j]);
+			}
+		}
+	}
+	public void printColOperators() {
+		for(int i = 0; i < colOperators.length; i++) {
+			System.out.println();
+			for(int j =0; j < colOperators[i].length; j++) {
+				
+				System.out.print(colOperators[i][j]);
+			}
+		}
+	}
+	
+	
+	public void solve() {
+		solveRows();
+		if(!checkIsSolved()) {
+			solveAll(0);
+		}
+		
+	}
+	
+	private boolean solveAll(int rowIndex) {
+		int[] initialRow = initialValues(variableData[rowIndex]);
+		if(rowIndex<size-1) {
+			if(solveAll(rowIndex + 1)) return true;
+			solveRow(rowIndex,0);
+			while(!equalRows(initialRow, variableData[rowIndex])) {
+				solveRow(rowIndex,0);
+				if(checkIsSolved()) return true;
+				solveAll(rowIndex + 1);
+			}
+		}
+		solveRow(rowIndex,0);
+		while(!equalRows(initialRow, variableData[rowIndex])) {
+			solveRow(rowIndex,0);
+			if(checkIsSolved()) return true;
+		}
+		
+		return false;
+		}
+	
+	private int[] initialValues(Number[] row) {
+		int[] initialValues = new int[row.length];
+		for(int i = 0; i < row.length; i++) {
+			initialValues[i] = row[i].value;
+		}
+		return initialValues;
+	}
+	
+	private boolean equalRows(int[] row1, Number[] row2) {
+		for(int i = 0; i < row1.length; i++) {
+			if(row1[i] != row2[i].value) return false;
+		}
+		return true;
+	}
+	
+	private void solveRows() {
+		for(int i = 0; i < size; i++) {
+			solveRow(i,0);
+		}
+	}
+	
+	private boolean checkIsSolved() {
+		boolean isSolved = false;
+		for(int i = 0; i < size; i++) {
+			isSolved = isSolved && checkCol(i);
+		}
+		return isSolved;
+		
+	}
+	
+	private boolean solveRow(int row, int index) {
+		Number currentNumber = variableData[row][index];
+		if(index<variableData.length-1) {
+			if(solveRow(row, index +1)) return true;
+			for(int i = 0; i < 9; i++) {
+				if(!currentNumber.isInmutable()) {
+					currentNumber.increase();
+					if(checkRow(row)) return true;
+					solveRow(row, index+1);
+				}
+			}
+		}
+		for(int i = 0; i < 9; i++) {
+			if(!currentNumber.isInmutable()) {
+				currentNumber.increase();
+				if(checkRow(row)) return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkRow(int index) {
+		int value = variableData[index][0].value;
+		int nextValue;
+		String operator;
+		for(int i = 0; i < variableData.length-1; i++) {
+			operator = rowOperators[index][i];
+			nextValue = variableData[index][i+1].value;
+			try{
+				value = performOperation(value, operator, nextValue);
+			} catch(Exception e) {
+				return false;
+			}
+		}
+		return value==Integer.valueOf(data[index*2][2*size]);
+	}
+	
+	public boolean checkCol(int index) {
+		int value = variableData[0][index].value;
+		int nextValue;
+		String operator;
+		for(int i = 0; i < variableData.length-1; i++) {
+			operator = colOperators[i][index];
+			nextValue = variableData[i+1][index].value;
+			try{
+				value = performOperation(value, operator, nextValue);
+			} catch(Exception e) {
+				return false;
+			}
+		}
+		return value==Integer.valueOf(data[data.length][index*2]);
+	}
+	
+
+	private int performOperation(int value, String operator, int nextValue) {
+		switch(operator) {
+			case("+"):
+				return value + nextValue;
+			case("-"):
+				return value - nextValue;
+			case("*"):
+				return value * nextValue;
+			case("/"):
+				return value / nextValue;
+		}
+		throw new IllegalArgumentException("Rare operator");
 	}
 }
