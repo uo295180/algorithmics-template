@@ -5,19 +5,19 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 
 public class NumericSquareOneTest {
-String[][] data;
+	String[][] data;
 	
-//	@Test
-//	public void test1() {
-//		data = BoardLoader.loadData("src/algstudent/s6/test00.txt");
-//		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
-//		String[][] solution = numericSquareOne.solve();
-//		String[][] expected = {{"6","2"},
-//				   				{"4","3"}};
-//		assertArrayEquals(solution, expected);
-////		numericSquareOne.printBoard();
-//	}
-//	
+	@Test
+	public void test1() {
+		data = BoardLoader.loadData("src/algstudent/s6/test00.txt");
+		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
+		String[][] solution = numericSquareOne.solve();
+		String[][] expected = {{"6","2"},
+				   				{"4","3"}};
+		assertArrayEquals(solution, expected);
+//		numericSquareOne.printBoard();
+	}
+	
 //	@Test
 //	public void test2() {
 //		data = BoardLoader.loadData("src/algstudent/s6/test01.txt");
@@ -30,20 +30,20 @@ String[][] data;
 //		assertArrayEquals(solution, expected);
 ////		numericSquareOne.printBoard();
 //	}
-	
-	@Test
-	public void test3() {
-		data = BoardLoader.loadData("src/algstudent/s6/test02.txt");
-		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
-		String[][] solution = numericSquareOne.solve();
-		printMatrix(solution);
-		String[][] expected = {{"3","2","1"},
-				{"6","5","5"},
-				{"3","5","6"}};
-		assertArrayEquals(solution, expected);
-//		numericSquareOne.printBoard();
-	}
-	
+//	
+//	@Test
+//	public void test3() {
+//		data = BoardLoader.loadData("src/algstudent/s6/test02.txt");
+//		NumericSquareOne numericSquareOne = new NumericSquareOne(data);
+//		String[][] solution = numericSquareOne.solve();
+//		printMatrix(solution);
+//		String[][] expected = {{"3","2","1"},
+//				{"6","5","5"},
+//				{"3","5","6"}};
+//		assertArrayEquals(solution, expected);
+////		numericSquareOne.printBoard();
+//	}
+//	
 //	@Test
 //	public void test4() {
 //		data = BoardLoader.loadData("src/algstudent/s6/test03.txt");
@@ -116,13 +116,13 @@ String[][] data;
 ////		numericSquareOne.printBoard();
 ////		numericSquareOne.printNumberBoard();
 //	}
-	
-	private void printMatrix(String[][] solution) {
-		for(int i = 0;  i < solution.length; i++) {
-			for(int j = 0; j < solution[0].length; j++) {
-				System.out.print(solution[i][j]);
-			}
-			System.out.println();
-		} 
-	}
+//	
+//	private void printMatrix(String[][] solution) {
+//		for(int i = 0;  i < solution.length; i++) {
+//			for(int j = 0; j < solution[0].length; j++) {
+//				System.out.print(solution[i][j]);
+//			}
+//			System.out.println();
+//		} 
+//	}
 }
