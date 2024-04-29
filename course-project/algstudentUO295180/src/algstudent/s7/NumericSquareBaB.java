@@ -1,15 +1,19 @@
 package algstudent.s7;
 
-import algstudent.s6.Number;
+import java.util.PriorityQueue;
 
 public class NumericSquareBaB {
 	
 	int size;
 	String[][] data;
 	int[][] variableData;
+	int[][] solution;
 	boolean[][] inmutables;
 	String[][] rowOperators;
 	String[][] colOperators;
+	boolean foundSolution = false;
+	
+	PriorityQueue<State> statesHeap = new PriorityQueue<State>(new StatesComparator());
 	
 	public NumericSquareBaB(String[][] data){
 		this.data = data;
@@ -21,23 +25,34 @@ public class NumericSquareBaB {
 		fillUpRowOperators();
 		fillUpColOperators();
 		
-		if(!branchAndBound()) {
-			System.out.println("This is returning false");
+	}
+	
+	public int[][] getSolution(){
+		return solution;
+	}
+	
+	public void branchAndBound() {
+		int init = 0;
+		Pair<Integer, Integer> coords = translateCoords(init);
+		while(inmutables[coords.x][coords.y]) {
+			init++;
+			coords = translateCoords(init);
+		}
+		for(int i = 0; i < 10; i++) {
+			variableData[coords.x][coords.y] = i;
+			statesHeap.add(new State(variableData, init+1));
+		}
+		
+		while(!statesHeap.isEmpty()&&!foundSolution) {
+			State currentState = statesHeap.poll();
+			int[][] currentStateData = currentState.getData();
+			int position = currentState.getIndex();
+			branchAndBound(currentStateData, position);
 		}
 		
 	}
 	
-	public int[][] getSolution(){
-		return variableData;
-	}
-	
-	public boolean branchAndBound() {
-		int[][] values = copyOf(variableData);
-		
-		return branchAndBound(values,0);
-	}
-	
-	private boolean branchAndBound(int[][] values, int index) {
+	private void branchAndBound(int[][] values, int index) {
 		Pair<Integer, Integer> coords = translateCoords(index);
 		int[][] safeCopy = copyOf(values);
 		boolean isInmutable = false;
@@ -52,52 +67,47 @@ public class NumericSquareBaB {
 					if(coords.y==size-1) {
 						if(checkRow(safeCopy, coords.x)) {
 							copySolution(safeCopy);
-							return true;
+							foundSolution = true;
 						}
-						
-					}
-					else {
-						if(branchAndBound(safeCopy, index + 1)) return true;
+					} else {
+						statesHeap.add(new State(safeCopy, index+1));
 					}
 					
 				}
 			}
 			else if(coords.y==size-1) {
 				if(checkRow(safeCopy, coords.x)){
-					if(branchAndBound(safeCopy, index + 1)) return true;
+					statesHeap.add(new State(safeCopy, index+1));
 				}	
 			}
 			else {
-				if(branchAndBound(safeCopy, index + 1)) return true;
+				statesHeap.add(new State(safeCopy, index+1));
 			}
 		}
 		if(isInmutable&&coords.x!=size-1&&coords.y!=size-1) {
-			if(branchAndBound(safeCopy, index + 1)) return true;
+			statesHeap.add(new State(safeCopy, index+1));
 		}else if(isInmutable&&coords.x==size-1) {
 			if(checkCol(safeCopy, coords.y)) {
 				if(coords.y==size-1) {
 					if(checkRow(safeCopy, coords.x)) {
 						copySolution(safeCopy);
-						return true;
+						foundSolution = true;
 					}
 				}
 				else {
-					if(branchAndBound(safeCopy, index + 1)) return true;
+					statesHeap.add(new State(safeCopy, index+1));
 				}
 			}
 		}else if(isInmutable&&coords.y==size-1) {
 			if(checkRow(safeCopy, coords.x)){
-				if(branchAndBound(safeCopy, index + 1)) return true;
+				statesHeap.add(new State(safeCopy, index+1));
 			}	
 		}
-			
-		return false;
-		
 	}
 	
 	
 	public void copySolution(int[][] safeCopy) {
-		variableData = copyOf(safeCopy);
+		solution = copyOf(safeCopy);
 	}
 	
 	
@@ -186,7 +196,7 @@ public class NumericSquareBaB {
 		for(int i = 0; i < data.length - 2; i+=2) {
 			colCounter = 0;
 			for(int j = 0; j < data[i].length-2; j+=2) {
-				if(data[i][j].equals("?")) variableData[rowCounter][colCounter] = 0;
+				if(data[i][j].equals("?")) variableData[rowCounter][colCounter] = -1;
 				else {
 					variableData[rowCounter][colCounter] = Integer.valueOf(data[i][j]);
 					inmutables[rowCounter][colCounter] = true;

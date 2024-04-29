@@ -1,20 +1,17 @@
 package algstudent.s6;
 
-import java.util.Arrays;
-
 import algstudent.s7.Pair;
 
-public class NumericSquareOne {
-	
+public class NumericSquareAll {
 	int size;
 	String[][] data;
 	int[][] variableData;
 	boolean[][] inmutables;
 	String[][] rowOperators;
 	String[][] colOperators;
+	int numberOfSolutions;
 	
-	
-	public NumericSquareOne(String[][]data) {
+	public NumericSquareAll(String[][]data) {
 		this.data = data;
 		size = data.length-data.length/2-1;
 		reorderData();
@@ -25,64 +22,85 @@ public class NumericSquareOne {
 		
 		//solve();
 	}
-	
+
 	public int[][] getSolution(){
 		return variableData;
 	}
 	
-	public boolean backtracking() {
-		return backtracking(0);
+	public void backtracking() {
+		backtracking(0);
 	}
 	
-	private boolean backtracking(int index) {
+	private void backtracking(int index) {
 		Pair<Integer, Integer> coords = translateCoords(index);
 		boolean isInmutable = false;
+		boolean divisionRow = false;
+		boolean divisionCol = false;
+
 		for(int i = 0; i < 10; i++) {
 			if(inmutables[coords.x][coords.y]) {
 				isInmutable=true;
 				break;
 			}
 			variableData[coords.x][coords.y] = i;
-			if(coords.x==size-1) {
+			if(coords.x>0&&colOperators[coords.x-1][coords.y]=="/") {
+				if(performOperation(variableData[coords.x-1][coords.y], "/", i)==Integer.MAX_VALUE) divisionCol=true;
+				else divisionCol=false;
+			}if(coords.y>0&&rowOperators[coords.x][coords.y-1]=="/") {
+				if(performOperation(variableData[coords.x][coords.y-1], "/", i)==Integer.MAX_VALUE) divisionRow=true;
+				else divisionRow=false;
+			}
+			
+			if(coords.x==size-1&&!divisionRow&&!divisionCol) {
 				if(checkCol(coords.y)) {
 					if(coords.y==size-1) {
 						if(checkRow(coords.x)) {
-							return true;
+							numberOfSolutions++;
+							System.out.println("Solution " + numberOfSolutions);
+							printSolution();
 						}
 					}
 					else {
-						if(backtracking(index + 1)) return true;
+						backtracking(index + 1);
 					}
 				}
 			}
-			else if(coords.y==size-1) {
+			else if(coords.y==size-1&&!divisionRow&&!divisionCol) {
 				if(checkRow(coords.x)){
-					if(backtracking(index + 1)) return true;
+					backtracking(index + 1);
 				}	
 			}
-			else {
-				if(backtracking(index + 1)) return true;
+			else if(!divisionRow&&!divisionCol){
+				backtracking(index + 1);
 			}
 		}
-		if(isInmutable&&coords.x!=size-1&&coords.y!=size-1) {
-			if(backtracking(index + 1)) return true;
-		}else if(isInmutable&&coords.x==size-1) {
+		if(coords.x>0&&colOperators[coords.x-1][coords.y]=="/") {
+			if(performOperation(variableData[coords.x-1][coords.y], "/", variableData[coords.x][coords.y])==Integer.MAX_VALUE) divisionCol=true;
+			else divisionCol=false;
+		}if(coords.y>0&&rowOperators[coords.x][coords.y-1]=="/") {
+			if(performOperation(variableData[coords.x][coords.y-1], "/", variableData[coords.x][coords.y])==Integer.MAX_VALUE) divisionRow=true;
+			else divisionRow=false;
+		}
+		if(isInmutable&&coords.x!=size-1&&coords.y!=size-1&&!divisionRow&&!divisionCol) {
+			backtracking(index + 1);
+		}else if(isInmutable&&coords.x==size-1&&!divisionRow&&!divisionCol) {
 			if(checkCol(coords.y)) {
 				if(coords.y==size-1) {
 					if(checkRow(coords.x)) {
-						return true;
+						numberOfSolutions++;
+						System.out.println("Solution " + numberOfSolutions);
+						printSolution();
 					}
 				}
 				else {
-					if(backtracking(index + 1)) return true;
+					backtracking(index + 1);
 				}
 			}
-		}else if(isInmutable&&coords.y==size-1) {
+		}else if(isInmutable&&coords.y==size-1&&!divisionRow&&!divisionCol) {
 			if(checkRow(coords.x)){
-				if(backtracking(index + 1)) return true;
+				backtracking(index + 1);
 			}	
 		}
-		return false;
 	}
 	
 	public Pair<Integer, Integer> translateCoords(int value){
@@ -157,9 +175,9 @@ public class NumericSquareOne {
 	
 	public void printBoard() {
 		System.out.println("Current status:");
-		for(int i = 0; i < data.length-1; i++) {
-			for(int j = 0; j < data[i].length; j++) {
-				System.out.print(data[i][j] + " ");
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				System.out.print(variableData[i][j] + " ");
 			}
 			System.out.println();
 		}
@@ -172,6 +190,17 @@ public class NumericSquareOne {
 			for(int j = 0; j < data[i].length; j++) {
 				System.out.print(data[i][j]);
 			}
+		}
+		System.out.println();
+	}
+	
+	public void printSolution() {
+		System.out.println();
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				System.out.print(variableData[i][j] + " ");
+			}
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -278,5 +307,9 @@ public class NumericSquareOne {
 				return value / nextValue;
 		}
 		throw new IllegalArgumentException("Rare operator");
+	}
+
+	public int getNumberOfSolutions() {
+		return numberOfSolutions;
 	}
 }

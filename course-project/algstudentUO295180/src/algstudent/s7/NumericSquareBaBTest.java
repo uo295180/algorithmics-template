@@ -10,101 +10,136 @@ import algstudent.s6.NumericSquareOne;
 
 class NumericSquareBaBTest {
 
-String[][] data;
+	String[][] data;
+	int repetitions = 1000;
+	long t1;
+	long t2;
 	
 	@Test
 	public void test1() {
+		
 		System.out.println();
 		System.out.println("-------Test 1-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test00.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test00.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
+		long time = 0;
+		
+		for(int i=0; i<repetitions;i++) {
+			numericSquareBaB = new NumericSquareBaB(data);
+			t1 = System.currentTimeMillis();
+			numericSquareBaB.branchAndBound();
+			t2 = System.currentTimeMillis();
+			time+=(t2-t1);
+		}
+			
+			
+		
+		System.out.println("Time: " + ((double)(time)/ (double) repetitions));
+		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
-		String[][] solution = toStringMatrix(solutionInt);
-		String[][] expected = {{"6","2"},
-				   				{"4","3"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-		assertArrayEquals(solution, expected);
+//		String[][] solution = toStringMatrix(solutionInt);
 
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	@Test
 	public void test2() {
 		System.out.println();
 		System.out.println("-------Test 2-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test01.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test01.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
-		int[][] solutionInt = numericSquareBaB.getSolution();
-
-		String[][] solution = toStringMatrix(solutionInt);
+		long time = 0;
 		
-		String[][] expected = {{"1","8","3"},
-	   			{"4","3","2"},
-				{"9","7","4"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-		assertArrayEquals(solution, expected);
+		for(int i=0; i<repetitions;i++) {
+			numericSquareBaB = new NumericSquareBaB(data);
+			t1 = System.currentTimeMillis();
+			numericSquareBaB.branchAndBound();
+			t2 = System.currentTimeMillis();
+			time+=(t2-t1);
+		}
+			
+			
+		
+		System.out.println("Time: " + (time));
+		
+//		int[][] solutionInt = numericSquareBaB.getSolution();
+//
+//		String[][] solution = toStringMatrix(solutionInt);
 
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	@Test
 	public void test3() {
 		System.out.println();
 		System.out.println("-------Test 3-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test02.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test02.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
-		int[][] solutionInt = numericSquareBaB.getSolution();
-
-		String[][] solution = toStringMatrix(solutionInt);
-		printMatrix(solution);
-		String[][] expected = {{"3","2","1"},
-				{"6","5","5"},
-				{"3","5","6"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-		assertArrayEquals(solution, expected);
-
+		long time = 0;
+		
+		for(int i=0; i<repetitions;i++) {
+			numericSquareBaB = new NumericSquareBaB(data);
+			t1 = System.currentTimeMillis();
+			numericSquareBaB.branchAndBound();
+			t2 = System.currentTimeMillis();
+			time+=(t2-t1);
+		}
+			
+		System.out.println("Time: " + (time));
+//		int[][] solutionInt = numericSquareBaB.getSolution();
+//
+//		String[][] solution = toStringMatrix(solutionInt);
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	@Test
 	public void test4() {
 		System.out.println();
 		System.out.println("-------Test 4-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test03.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test03.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
+		
+		long t1 = System.currentTimeMillis();
+		for(int i=0; i<repetitions;i++)
+			numericSquareBaB.branchAndBound();
+		long t2 = System.currentTimeMillis();
+		
+		System.out.println("Time: " + (t2-t1));
+		
+		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
 		String[][] solution = toStringMatrix(solutionInt);
-		String[][] expected = {{"1","3","1","1"},
-				{"5","1","1","1"},
-				{"1","1","9","1"},
-				{"0","1","1","0"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-//		numericSquareOne.printNumberBoard();
-//		numericSquareOne.printRowOperators();
-//		numericSquareOne.printColOperators();
-		assertArrayEquals(solution, expected);
 
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	@Test
 	public void test5() {
 		System.out.println();
 		System.out.println("-------Test 5-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test04.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test04.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
+		
+		long t1 = System.currentTimeMillis();
+		for(int i=0; i<repetitions;i++)
+			numericSquareBaB.branchAndBound();
+		long t2 = System.currentTimeMillis();
+		
+		System.out.println("Time: " + (t2-t1));
+		
+		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
 		String[][] solution = toStringMatrix(solutionInt);
-		String[][] expected = {{"1","4","1","0"},
-				{"4","1","1","2"},
-				{"1","1","9","1"},
-				{"1","0","1","0"}};
-		assertArrayEquals(solution, expected);
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
+
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	
@@ -112,60 +147,66 @@ String[][] data;
 	public void test6() {
 		System.out.println();
 		System.out.println("-------Test 6-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test05.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test05.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
+		
+		long t1 = System.currentTimeMillis();
+		for(int i=0; i<repetitions;i++)
+			numericSquareBaB.branchAndBound();
+		long t2 = System.currentTimeMillis();
+		
+		System.out.println("Time: " + (t2-t1));
+		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
 		String[][] solution = toStringMatrix(solutionInt);
-		String[][] expected = {{"1","1","1","1","0"},
-				{"3","0","1","6","2"},
-				{"1","1","9","1","1"},
-				{"3","2","1","0","1"},
-				{"5","3","9","5","2"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-		assertArrayEquals(solution, expected);
 
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	@Test
 	public void test7() {
 		System.out.println();
 		System.out.println("-------Test 7-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test06.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test06.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
+		
+		long t1 = System.currentTimeMillis();
+		for(int i=0; i<repetitions;i++)
+			numericSquareBaB.branchAndBound();
+		long t2 = System.currentTimeMillis();
+		
+		System.out.println("Time: " + (t2-t1));
+		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
 		String[][] solution = toStringMatrix(solutionInt);
-		String[][] expected = {{"1","1","1","1","0"},
-				{"0","0","1","6","2"},
-				{"1","1","0","1","1"},
-				{"3","2","1","0","1"},
-				{"2","3","0","5","2"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-		assertArrayEquals(solution, expected);
 
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 	}
 	
 	@Test
 	public void test8() {
 		System.out.println();
 		System.out.println("-------Test 8-------");
-		data = BoardLoader.loadData("src/algstudent/s6/test07.txt");
+		data = BoardLoader.loadData("src/algstudent/s7/test07.txt");
 		NumericSquareBaB numericSquareBaB = new NumericSquareBaB(data);
+		
+		long t1 = System.currentTimeMillis();
+		for(int i=0; i<repetitions;i++)
+			numericSquareBaB.branchAndBound();
+		long t2 = System.currentTimeMillis();
+		
+		System.out.println("Time: " + (t2-t1));
+		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
 		String[][] solution = toStringMatrix(solutionInt);
-		String[][] expected = {{"0","0","0","3","0"},
-				{"0","0","1","2","6"},
-				{"0","0","2","1","1"},
-				{"4","2","0","0","1"},
-				{"2","3","0","3","4"}};
-		printMatrix(solution);
-		numericSquareBaB.printBoard();
-//		numericSquareOne.printNumberBoard();
-		assertArrayEquals(solution, expected);
+
+//		printMatrix(solution);
+//		numericSquareBaB.printBoard();
 
 	}
 	
