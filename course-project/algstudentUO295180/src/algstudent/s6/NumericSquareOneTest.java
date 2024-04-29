@@ -8,7 +8,7 @@ import algstudent.s7.NumericSquareBaB;
 
 public class NumericSquareOneTest {
 	String[][] data;
-	int repetitions = 1;
+	int repetitions = 10000;
 	
 	@Test
 	public void test1() {
@@ -22,7 +22,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -46,7 +46,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -73,7 +73,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -100,7 +100,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -130,7 +130,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 		String[][] solution = toStringMatrix(solutionInt);
@@ -156,7 +156,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -184,7 +184,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -212,7 +212,7 @@ public class NumericSquareOneTest {
 			numericSquareOne.backtracking();
 		long t2 = System.currentTimeMillis();
 		
-		System.out.println("Time: " + (t2-t1));
+		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
