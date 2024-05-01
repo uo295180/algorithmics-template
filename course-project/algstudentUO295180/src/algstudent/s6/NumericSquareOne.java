@@ -12,6 +12,7 @@ public class NumericSquareOne {
 	boolean[][] inmutables;
 	String[][] rowOperators;
 	String[][] colOperators;
+	long developedNodes = 0;
 	
 	
 	public NumericSquareOne(String[][]data) {
@@ -35,9 +36,11 @@ public class NumericSquareOne {
 	}
 	
 	private boolean backtracking(int index) {
+		
 		Pair<Integer, Integer> coords = translateCoords(index);
 		boolean isInmutable = false;
 		for(int i = 0; i < 10; i++) {
+			developedNodes++;
 			if(inmutables[coords.x][coords.y]) {
 				isInmutable=true;
 				break;
@@ -51,20 +54,24 @@ public class NumericSquareOne {
 						}
 					}
 					else {
+						developedNodes++;
 						if(backtracking(index + 1)) return true;
 					}
 				}
 			}
 			else if(coords.y==size-1) {
 				if(checkRow(coords.x)){
+					developedNodes++;
 					if(backtracking(index + 1)) return true;
 				}	
 			}
 			else {
+				developedNodes++;
 				if(backtracking(index + 1)) return true;
 			}
 		}
 		if(isInmutable&&coords.x!=size-1&&coords.y!=size-1) {
+			developedNodes++;
 			if(backtracking(index + 1)) return true;
 		}else if(isInmutable&&coords.x==size-1) {
 			if(checkCol(coords.y)) {
@@ -74,11 +81,13 @@ public class NumericSquareOne {
 					}
 				}
 				else {
+					developedNodes++;
 					if(backtracking(index + 1)) return true;
 				}
 			}
 		}else if(isInmutable&&coords.y==size-1) {
 			if(checkRow(coords.x)){
+				developedNodes++;
 				if(backtracking(index + 1)) return true;
 			}	
 		}
@@ -278,5 +287,8 @@ public class NumericSquareOne {
 				return value / nextValue;
 		}
 		throw new IllegalArgumentException("Rare operator");
+	}
+	public long getDevelopedNodes() {
+		return developedNodes;
 	}
 }

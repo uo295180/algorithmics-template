@@ -8,7 +8,7 @@ import algstudent.s7.NumericSquareBaB;
 
 public class NumericSquareOneTest {
 	String[][] data;
-	int repetitions = 10000;
+	int repetitions = 1;
 	
 	@Test
 	public void test1() {
@@ -23,6 +23,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -47,6 +49,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -74,6 +78,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -101,6 +107,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -131,6 +139,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 		String[][] solution = toStringMatrix(solutionInt);
@@ -157,6 +167,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -185,6 +197,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 
@@ -213,6 +227,8 @@ public class NumericSquareOneTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (double)(t2-t1)/(double) (repetitions));
+		System.out.println("Developed nodes: " + numericSquareOne.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareOne.getSolution();
 

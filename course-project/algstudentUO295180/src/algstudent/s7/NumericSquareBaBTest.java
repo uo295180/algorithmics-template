@@ -11,7 +11,7 @@ import algstudent.s6.NumericSquareOne;
 class NumericSquareBaBTest {
 
 	String[][] data;
-	int repetitions = 1000;
+	int repetitions = 1;
 	long t1;
 	long t2;
 	
@@ -35,6 +35,7 @@ class NumericSquareBaBTest {
 			
 		
 		System.out.println("Time: " + ((double)(time)/ (double) repetitions));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
 		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
@@ -62,7 +63,9 @@ class NumericSquareBaBTest {
 			
 			
 		
-		System.out.println("Time: " + (time));
+		System.out.println("Time: " + ((double)(time)/ (double) repetitions));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 		
 //		int[][] solutionInt = numericSquareBaB.getSolution();
 //
@@ -89,6 +92,8 @@ class NumericSquareBaBTest {
 		}
 			
 		System.out.println("Time: " + (time));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 //		int[][] solutionInt = numericSquareBaB.getSolution();
 //
 //		String[][] solution = toStringMatrix(solutionInt);
@@ -109,6 +114,8 @@ class NumericSquareBaBTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (t2-t1));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 		
 		
 		int[][] solutionInt = numericSquareBaB.getSolution();
@@ -132,6 +139,8 @@ class NumericSquareBaBTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (t2-t1));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 		
 		
 		int[][] solutionInt = numericSquareBaB.getSolution();
@@ -156,6 +165,8 @@ class NumericSquareBaBTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (t2-t1));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
@@ -178,6 +189,8 @@ class NumericSquareBaBTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (t2-t1));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 
@@ -200,6 +213,8 @@ class NumericSquareBaBTest {
 		long t2 = System.currentTimeMillis();
 		
 		System.out.println("Time: " + (t2-t1));
+		System.out.println("Developed nodes: " + numericSquareBaB.getDevelopedNodes());
+
 		
 		int[][] solutionInt = numericSquareBaB.getSolution();
 

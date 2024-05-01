@@ -12,6 +12,7 @@ public class NumericSquareBaB {
 	String[][] rowOperators;
 	String[][] colOperators;
 	boolean foundSolution = false;
+	long developedNodes = 0;
 	
 	PriorityQueue<State> statesHeap = new PriorityQueue<State>(new StatesComparator());
 	
@@ -40,6 +41,7 @@ public class NumericSquareBaB {
 		}
 		for(int i = 0; i < 10; i++) {
 			variableData[coords.x][coords.y] = i;
+			developedNodes++;
 			statesHeap.add(new State(variableData, init+1));
 		}
 		
@@ -70,6 +72,7 @@ public class NumericSquareBaB {
 							foundSolution = true;
 						}
 					} else {
+						developedNodes++;
 						statesHeap.add(new State(safeCopy, index+1));
 					}
 					
@@ -77,14 +80,17 @@ public class NumericSquareBaB {
 			}
 			else if(coords.y==size-1) {
 				if(checkRow(safeCopy, coords.x)){
+					developedNodes++;
 					statesHeap.add(new State(safeCopy, index+1));
 				}	
 			}
 			else {
+				developedNodes++;
 				statesHeap.add(new State(safeCopy, index+1));
 			}
 		}
 		if(isInmutable&&coords.x!=size-1&&coords.y!=size-1) {
+			developedNodes++;
 			statesHeap.add(new State(safeCopy, index+1));
 		}else if(isInmutable&&coords.x==size-1) {
 			if(checkCol(safeCopy, coords.y)) {
@@ -95,11 +101,13 @@ public class NumericSquareBaB {
 					}
 				}
 				else {
+					developedNodes++;
 					statesHeap.add(new State(safeCopy, index+1));
 				}
 			}
 		}else if(isInmutable&&coords.y==size-1) {
 			if(checkRow(safeCopy, coords.x)){
+				developedNodes++;
 				statesHeap.add(new State(safeCopy, index+1));
 			}	
 		}
@@ -265,5 +273,9 @@ public class NumericSquareBaB {
 				return value / nextValue;
 		}
 		throw new IllegalArgumentException("Rare operator");
+	}
+	
+	public long getDevelopedNodes() {
+		return developedNodes;
 	}
 }
